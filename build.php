@@ -1,6 +1,6 @@
 <?php
 
-$bdip = read_ip_list('https://su.baidu.com/helps/index.html#/1/5a4ca79bb34f69327c4b9dc3');
+$bdip = read_ip_list('https://su.baidu.com/agency/api.html#/10_changjianwenti/0_HIDE_FAQ/20_baiduyunjiasujiedianIPdizhiduan.md');
 $cfip = read_ip_list('https://www.cloudflare.com/ips-v4');
 $list = array_merge($bdip, $cfip);
 
