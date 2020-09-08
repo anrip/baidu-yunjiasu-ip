@@ -4,9 +4,19 @@ $bdip = read_ip_list('https://su.baidu.com/agency/api.html#/10_changjianwenti/0_
 $cfip = read_ip_list('https://www.cloudflare.com/ips-v4');
 $list = array_merge($bdip, $cfip);
 
+make_nginx_waf_ip($list);
 make_nginx_real_ip_conf($list);
 
 ///////////////////////////////////////////////////////////
+
+function make_nginx_waf_ip($list) {
+    foreach($list as &$ip) {
+        $ip = "allow {$ip};";
+    }
+    $list[] = 'deny all;';
+    $text = implode("\n", $list);
+    file_put_contents('./dist/nginx_waf_ip.conf', $text);
+}
 
 function make_nginx_real_ip_conf($list) {
     foreach($list as &$ip) {
